@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content%}
+
+    <form method = "POST">
+        {% csrf_token %}
+        <div class = "col-md-6 offset-md-3">
+            <h1 class ="font-weight-bold py-3">Register as a new user</h1>
+        <div class="form-outline mb-4">
+            <input type = "text" name = "accountNumber" placeholder="Enter the account's number"/>
+            <br>
+        </div>
+        <div class = 'form-outline-mb-4'>
+            <select id = "accountType" name = "accountType">
+                <option value = "savings">Savings Account</option>
+                <option value = "fixed-deposit">Fixed Deposit</option>
+                <option value = "salary">Salary Account</option>
+                <option value = "recurring-deposit">Recurring Deposit</option>
+            </select>
+            <br>
+        </div>
+        <div class="form-outline mb-4">
+            <input type = "number" name = "balance" placeholder="Enter the starting balance"/>
+            <br>
+        </div>
+        <button type = "submit" class = "btn btn-md">Add account</button>
+        </div>
+    </form>
+{%endblock content%}

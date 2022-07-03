@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+{%block content%}
+
+<h1 class = 'font-weight-bold'> Your accounts</h1>
+<a class = 'btn btn-primary' href = "{% url 'add_account' %}">Add Account</a>
+<table class = 'table'>
+    <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Type</th>
+            <th>Current Balance</th>
+            <th>View more</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts.all %}
+
+        <tr>
+            <td>{{account.accountNumber}}</td>
+            <td>{{account.accountType}}</td>
+            <td>{{account.balance}}</td>
+            <td>
+                <a href = "{% url 'account_details' account.id %}">Click here to view more details</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody> 
+</table>
+{%endblock content%}

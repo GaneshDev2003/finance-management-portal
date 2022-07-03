@@ -1,0 +1,76 @@
+{% extends 'base.html'%}
+{%block content%}
+<div style = "background-color: #D3D3D3;" hx-trigger = " transactionListChanged from:body" hx-get = "{%url 'account_details' account.id%}" hx-target = "#main">
+    <div class = "row g-0 " style="display: flex;
+    justify-content: center;
+    margin-top : 0.5%;">
+        <div class = "top-card col-md-2 text-center" >
+            <div class = "row">
+                <h2 class = 'col md-10'>Balance</h2>
+                <h2 class = 'col md-10'>&#x20b9;{{account.balance}}</h2>
+            </div>
+        </div>
+        <div class = "top-card col-md-2 text-center">
+            <h2 class = 'col-md-10'> Monthly earning 
+                <br> &#x20b9; {{earning}}</h2>
+        </div>
+        <div class = "top-card col-md-2 text-center">
+            <h2 class = 'col-md-10'>Monthly spendings <br> &#x20b9; {{expenditure}}</h2>
+        </div>
+        <div class = "top-card col-md-2 text-center">
+            <button type = "button" class = 'btn btn-md' hx-get = "{% url 'add_transaction' account.id %}?page=1" hx-target = "#dialog">
+                <i class = "fa fa-plus"></i>
+                Add Transaction
+            </button>
+        </div>
+      </div>
+    <div class = "table-div">
+        <table class = 'table'>
+   
+                <thead class = "table-head" >
+                    <tr>
+                        <th>Transaction type</th>
+                        <th>Transaction amount</th>
+                        <th>Purpose</th>
+                        <th>Date of transaction</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            <tbody >
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{transaction.transactionType}}</td>
+                    <td>{{transaction.transactionAmount}}</td>
+                    <td>{{transaction.transactionPurpose}}</td>
+                    <td>{{transaction.transactionDate}}</td>
+                    <td>
+                        <button type = "button" hx-get = "{% url 'update_transaction' account.id transaction.id%}" hx-target = "#dialog"class = "btn btn-primary"><i class = "fa fa-pencil"></i></button>
+                        <button type = "button" hx-get = "{% url 'delete_transaction' account.id transaction.id%}" hx-target = "#dialog" class = "btn btn-danger"><i class = "fa fa-trash"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+             </tbody>
+        </table>
+        <div class="pagination col-md-4 offset-md-4 align-items-center">
+                <span class="step-links col-md-4 offset-md-4">
+                    {% if transactions.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ transactions.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.
+                    </span>
+            
+                    {% if transactions.has_next %}
+                        <a href="?page={{ transactions.next_page_number }}">next</a>
+                        <a href="?page={{ transactions.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+        </div>  
+
+    </div>
+     
+</div>
+    
+{%endblock content%}

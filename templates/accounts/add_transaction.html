@@ -1,0 +1,35 @@
+
+{% block content%}
+
+    <form hx-post = {{ request.path }} class = "modal-content">
+        {% csrf_token %}
+        <div class = "modal-header">
+            <h1 class ="font-weight-bold py-3 modal-title">Add a transaction</h1>
+        </div>
+        <div class="modal-body">
+            <div class="form-outline mb-4">
+                <input type = "number" step = "0.01" name = "transactionAmount" placeholder="Enter the amount of transaction"/>
+                <br>
+            </div>
+            <div class = 'form-outline-mb-4'>
+                <select id = "transactionType" name = "transactionType">
+                    <option value = "credit">Credit</option>
+                    <option value = "debit">Debit</option>
+                </select>
+                <br>
+            </div>
+            <div class="form-outline mb-4">
+                <input type = "text" name = "transactionPurpose" placeholder="Purpose of transaction"/>
+                <br>
+            </div>
+            <div class="form-outline mb-4">
+                <input type = "date" name = "transactionDate" placeholder="Date"/>
+                <br>
+            </div>
+        </div>
+        <div class = "modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type = "submit" class = "btn btn-success">Add transaction</button>
+        </div>
+    </form>
+{%endblock content%}

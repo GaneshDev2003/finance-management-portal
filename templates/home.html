@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{%block content%}
+
+<div class = 'container-fluid welcome'>
+    <div class = "info col-md-6 offset-md-3">
+        <h1 class = "font-weight-bold text-center">
+            Your one stop solution to personal finance management.
+        </h1>
+    </div>
+    <div class = "text-center">
+        <a class = "btn btn-primary text-center" href="{% url 'signup' %}"> Sign up for free</a>
+    </div>
+</div>
+
+{%endblock content%}
